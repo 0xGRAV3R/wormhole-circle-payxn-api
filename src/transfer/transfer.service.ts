@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { ethers } from 'ethers';
 import { TransferDto } from './transfer.dto';
-import { Wormhole } from '@wormhole-foundation/wormhole-sdk-ts';
+import { Wormhole } from '@wormhole-foundation/sdk';
 
 @Injectable()
 export class TransferService {
