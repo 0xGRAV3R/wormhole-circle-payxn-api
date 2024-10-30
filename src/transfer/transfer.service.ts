@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ethers } from 'ethers';
 import { TransferDto } from './transfer.dto';
-import { Wormhole } from '@wormhole-foundation/sdk';
+import { completeTransfer } from '@wormhole-foundation/sdk';
 import * as dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables
