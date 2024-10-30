@@ -1,8 +1,7 @@
-// src/transfer/transfer.controller.ts
-import { Controller, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
-import { ApiTags, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { Controller, Post, Body } from '@nestjs/common';
 import { TransferService } from './transfer.service';
 import { TransferDto } from './transfer.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('transfer')
 @Controller('transfer')
@@ -10,15 +9,7 @@ export class TransferController {
   constructor(private readonly transferService: TransferService) {}
 
   @Post()
-  @ApiBody({ type: TransferDto })
-  @ApiResponse({ status: 201, description: 'Transfer initiated successfully' })
-  @ApiResponse({ status: 400, description: 'Transfer initiation failed' })
-  async initiateTransfer(@Body() transferDto: TransferDto) {
-    try {
-      const transactionId = await this.transferService.transferUSDCToSolana(transferDto);
-      return { transactionId };
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
-    }
+  async transfer(@Body() transferDto: TransferDto): Promise<string> {
+    return this.transferService.transferUSDCToSolana(transferDto);
   }
 }
