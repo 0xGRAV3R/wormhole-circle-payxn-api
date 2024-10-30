@@ -1,4 +1,3 @@
-// src/transfer/transfer.service.ts
 import { Injectable } from '@nestjs/common';
 import { ethers } from 'ethers';
 import { TransferDto } from './transfer.dto';
@@ -25,12 +24,10 @@ export class TransferService {
         this.wallet
       );
 
-      // Approve USDC transfer to Wormhole
       const amountInUnits = ethers.utils.parseUnits(transferDto.amount.toString(), 6);
       const approveTx = await usdcContract.approve(process.env.WORMHOLE_CONTRACT_ADDRESS, amountInUnits);
       await approveTx.wait();
 
-      // Initiate the transfer via Wormhole
       const wormhole = new Wormhole({
         environment: 'mainnet',
       });
