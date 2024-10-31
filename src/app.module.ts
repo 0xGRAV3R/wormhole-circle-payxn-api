@@ -1,11 +1,15 @@
-// src/app.module.ts
 import { Module } from '@nestjs/common';
-import { TransferController } from './transfer/transfer.controller';
-import { TransferService } from './transfer/transfer.service';
+import { ConfigModule } from '@nestjs/config';
+import { PaymentModule } from './modules/payment/payment.module';
+import configuration from './config/configuration';
 
 @Module({
-  imports: [],
-  controllers: [TransferController],
-  providers: [TransferService],
+  imports: [
+    ConfigModule.forRoot({
+      load: [configuration],
+      isGlobal: true,
+    }),
+    PaymentModule,
+  ],
 })
 export class AppModule {}
