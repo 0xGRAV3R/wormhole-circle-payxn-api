@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ethers } from 'ethers';
 import { TransferDto } from './transfer.dto';
-import { completeTransfer } from '@wormhole-foundation/sdk';
+import { Wormhole } from '@wormhole-foundation/sdk';
 import * as dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables
@@ -11,6 +11,7 @@ dotenv.config(); // Load environment variables
 export class TransferService {
   private provider: ethers.JsonRpcProvider; // Adjust the provider type
   private wallet: ethers.Wallet;
+  
 
   constructor() {
     // Ensure you have the correct environment variable for Infura
